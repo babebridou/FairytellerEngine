@@ -32,7 +32,7 @@ public class FrameHelper {
 		}
 		JPanel contentPane = new JPanel(new BorderLayout());
 		contentPane.add(myComponent, BorderLayout.CENTER);
-		frame.getContentPane().add(new JScrollPane(contentPane));
+		frame.getContentPane().add(contentPane);
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run() {
 				frame.pack();
@@ -70,7 +70,7 @@ public class FrameHelper {
 		}
 		JPanel contentPane = new JPanel(new BorderLayout());
 		contentPane.add(myComponent, BorderLayout.CENTER);
-		frame.getContentPane().add(new JScrollPane(contentPane));
+		frame.getContentPane().add(contentPane);
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run() {
 				frame.setSize(width, height);
