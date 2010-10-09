@@ -9,6 +9,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+@SuppressWarnings("all")
+@Deprecated
 public class WorkflowService {
 
 	private Workflow workflow;
