@@ -5,6 +5,9 @@ public interface MainRunnable extends Runnable{
 	public boolean isSuccess();
 	public void setSuccess(boolean success);
 	
+	public boolean isProceed();
+	public void setProceed(boolean proceed);
+	
 	
 	/**
 	 * must be implemented

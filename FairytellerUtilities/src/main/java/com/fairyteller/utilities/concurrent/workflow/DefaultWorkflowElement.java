@@ -3,8 +3,10 @@ package com.fairyteller.utilities.concurrent.workflow;
 public class DefaultWorkflowElement implements WorkflowElement {
 
 	private String name;
-	private UIRunnable uiRunnable;
+	private UIRunnable startupUiRunnable;
+	private UIRunnable finishUiRunnable;
 	private MainRunnable mainRunnable;
+	private UIRunnable timeoutUiRunnable;
 	private UIHandler uiHandler;
 	private int mainRunnableTimeout;
 	
@@ -13,14 +15,16 @@ public class DefaultWorkflowElement implements WorkflowElement {
 	}
 	
 	public DefaultWorkflowElement(int stateIndex, String name,
-			UIRunnable uiRunnable, MainRunnable mainRunnable,
-			int mainRunnableTimeout, UIHandler uiHandler) {
+			UIRunnable startupUiRunnable, MainRunnable mainRunnable, UIRunnable finishUiRunnable,
+			int mainRunnableTimeout, UIHandler uiHandler, UIRunnable timeoutUiRunnable) {
 		super();
 		this.name = name;
-		this.uiRunnable = uiRunnable;
+		this.startupUiRunnable = startupUiRunnable;
+		this.finishUiRunnable = finishUiRunnable;
 		this.mainRunnable = mainRunnable;
 		this.mainRunnableTimeout = mainRunnableTimeout;
 		this.uiHandler = uiHandler;
+		this.timeoutUiRunnable = timeoutUiRunnable;
 	}
 	
 	public String getName() {
@@ -29,12 +33,21 @@ public class DefaultWorkflowElement implements WorkflowElement {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public UIRunnable getUiRunnable() {
-		return uiRunnable;
+	public UIRunnable getStartupUiRunnable() {
+		return startupUiRunnable;
 	}
-	public void setUiRunnable(UIRunnable uiRunnable) {
-		this.uiRunnable = uiRunnable;
+	public void setStartupUiRunnable(UIRunnable startupUiRunnable) {
+		this.startupUiRunnable = startupUiRunnable;
 	}
+	
+	public UIRunnable getFinishUiRunnable() {
+		return finishUiRunnable;
+	}
+
+	public void setFinishUiRunnable(UIRunnable finishUiRunnable) {
+		this.finishUiRunnable = finishUiRunnable;
+	}
+
 	public MainRunnable getMainRunnable() {
 		return mainRunnable;
 	}
@@ -56,6 +69,18 @@ public class DefaultWorkflowElement implements WorkflowElement {
 	public void setUiHandler(UIHandler handler){
 		this.uiHandler = handler;
 	}
+	
+	@Override
+	public UIRunnable getTimeoutUiRunnable() {
+		return this.timeoutUiRunnable;
+	}
+	
+	public void setTimeoutUiRunnable(UIRunnable timeoutUiRunnable) {
+		this.timeoutUiRunnable = timeoutUiRunnable;
+	}
+	
+	
+	
 	
 	
 }

@@ -18,12 +18,5 @@
 		</plugins>
 	</build>
 	<dependencies>
-		<dependency>
-			<groupId>com.fairyteller</groupId>
-			<artifactId>FairytellerSwing</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<type>jar</type>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 </project>

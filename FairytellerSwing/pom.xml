@@ -17,5 +17,11 @@
 		</plugins>
 	</build>
 	<dependencies>
+	<dependency>
+			<groupId>com.fairyteller</groupId>
+			<artifactId>FairytellerUtilities</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>jar</type>
+		</dependency>
 	</dependencies>
 </project>

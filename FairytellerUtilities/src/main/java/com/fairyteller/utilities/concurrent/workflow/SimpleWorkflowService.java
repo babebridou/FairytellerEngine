@@ -31,7 +31,14 @@ public class SimpleWorkflowService {
 				}
 			}
 		} catch (CancellationException e) {
-			e.printStackTrace();
+			UIRunnable timeoutUiRunnable = workflow.getTimeoutUIRunnable(stateIndex);
+			if(timeoutUiRunnable!=null){
+				workflow.getUIHandler(stateIndex).post(timeoutUiRunnable);
+			}
+			int onTimeoutNextState = workflow.getOnTimeoutNextState(stateIndex);
+			if(onTimeoutNextState >=0){
+				initWorkflowState(onTimeoutNextState, workflow);
+			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {
@@ -70,17 +77,20 @@ public class SimpleWorkflowService {
 	
 	private void processWorkflow(int stateIndex, Workflow workflow){
 		boolean success = false;
-		
+		UIRunnable startupUiRunnable = workflow.getStartupUIRunnable(stateIndex);
+		if(startupUiRunnable!=null){
+			workflow.getUIHandler(stateIndex).post(startupUiRunnable);
+		}
 		MainRunnable mainRunnable = workflow.getMainRunnable(stateIndex);
 		if(mainRunnable!=null){
 			mainRunnable.run();
 			success = mainRunnable.isSuccess();
 		}
 		
-		UIRunnable uiRunnable = workflow.getUIRunnable(stateIndex);
-		if(uiRunnable!=null){
-			uiRunnable.setSuccess(success);
-			workflow.getUIHandler(stateIndex).post(uiRunnable);
+		UIRunnable finishUiRunnable = workflow.getFinishUIRunnable(stateIndex);
+		if(finishUiRunnable!=null  && mainRunnable.isProceed()){
+			finishUiRunnable.setSuccess(success);
+			workflow.getUIHandler(stateIndex).post(finishUiRunnable);
 		}
 	}
 }

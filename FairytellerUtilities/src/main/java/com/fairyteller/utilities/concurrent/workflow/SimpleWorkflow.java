@@ -11,53 +11,40 @@ package com.fairyteller.utilities.concurrent.workflow;
  */
 public class SimpleWorkflow implements Workflow {
 
-	public static final int START = 0;
-	public static final int END = 1;
-	public static final int[] NEXT_ARRAY = { 1, 1 };
-	private UIRunnable startUIRunnable;
+	private UIRunnable startupUIRunnable;
 	private MainRunnable mainRunnable;
 	private int timeoutInMilliseconds;
-	private UIRunnable endUIRunnable;
+	private UIRunnable finishUIRunnable;
 	private final UIHandler uiHandler;
 
-	public SimpleWorkflow(UIRunnable startUIRunnable,
+	public SimpleWorkflow(UIRunnable startupUIRunnable,
 			MainRunnable mainRunnable, int timeoutInMilliseconds,
-			UIRunnable endUIRunnable, final UIHandler uiHandler) {
-		this.startUIRunnable = startUIRunnable;
+			UIRunnable finishUIRunnable, final UIHandler uiHandler) {
+		this.startupUIRunnable = startupUIRunnable;
 		this.mainRunnable = mainRunnable;
-		this.endUIRunnable = endUIRunnable;
+		this.finishUIRunnable = finishUIRunnable;
 		this.timeoutInMilliseconds = timeoutInMilliseconds;
 		this.uiHandler = uiHandler;
 	}
 
 	@Override
 	public MainRunnable getMainRunnable(int stateIndex) {
-		switch (stateIndex) {
-		case START:
-			return null;
-		case END:
 			return mainRunnable;
-		default:
-			return null;
-		}
 	}
 
 	@Override
-	public UIRunnable getUIRunnable(int stateIndex) {
-		switch (stateIndex) {
-		case START:
-			return startUIRunnable;
-		case END:
-			return endUIRunnable;
-		default:
-			return null;
-		}
+	public UIRunnable getStartupUIRunnable(int stateIndex) {
+		return startupUIRunnable;
 	}
 
+	@Override
+	public UIRunnable getFinishUIRunnable(int stateIndex) {
+		return finishUIRunnable;
+	}
+	
 	@Override
 	public int getNextState(int stateIndex) {
-		int next = NEXT_ARRAY[stateIndex];
-		return next;
+		return 0;
 	}
 
 	@Override
@@ -67,18 +54,26 @@ public class SimpleWorkflow implements Workflow {
 
 	@Override
 	public boolean isStateFinal(int stateIndex) {
-		return NEXT_ARRAY[stateIndex] == stateIndex;
+		return true;
 	}
 
 	@Override
 	public int getMainTimeout(int stateIndex) {
-		if (stateIndex == END)
 			return timeoutInMilliseconds;
-		return -1;
 	}
 	
 	@Override
 	public UIHandler getUIHandler(int stateIndex) {
 		return uiHandler;
+	}
+	
+	@Override
+	public int getOnTimeoutNextState(int stateIndex) {
+		return -1;
+	}
+	
+	@Override
+	public UIRunnable getTimeoutUIRunnable(int stateIndex) {
+		return null;
 	}
 }

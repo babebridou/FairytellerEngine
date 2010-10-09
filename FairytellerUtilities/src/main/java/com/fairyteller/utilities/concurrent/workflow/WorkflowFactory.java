@@ -21,10 +21,15 @@ public class WorkflowFactory {
 		}
 
 		@Override
-		public UIRunnable getUIRunnable(int stateIndex) {
-			return elements[stateIndex].getUiRunnable();
+		public UIRunnable getStartupUIRunnable(int stateIndex) {
+			return elements[stateIndex].getStartupUiRunnable();
 		}
 
+		@Override
+		public UIRunnable getFinishUIRunnable(int stateIndex) {
+			return elements[stateIndex].getFinishUiRunnable();
+		}
+		
 		@Override
 		public MainRunnable getMainRunnable(int stateIndex) {
 			return elements[stateIndex].getMainRunnable();
@@ -48,6 +53,16 @@ public class WorkflowFactory {
 		@Override
 		public int getMainTimeout(int stateIndex) {
 			return elements[stateIndex].getMainRunnableTimeout();
+		}
+		
+		@Override
+		public int getOnTimeoutNextState(int stateIndex) {
+			return -1;
+		}
+		
+		@Override
+		public UIRunnable getTimeoutUIRunnable(int stateIndex) {
+			return elements[stateIndex].getTimeoutUiRunnable();
 		}
 		
 	}
