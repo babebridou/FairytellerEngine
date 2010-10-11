@@ -3,6 +3,8 @@ package com.fairyteller.utilities.concurrent.workflow;
 public interface UIRunnable extends Runnable{
 	public boolean isSuccess();
 	public void setSuccess(boolean success);
+	public Object[] getArguments();
+	public void setArguments(Object[] arguments);
 
 	
 	/**

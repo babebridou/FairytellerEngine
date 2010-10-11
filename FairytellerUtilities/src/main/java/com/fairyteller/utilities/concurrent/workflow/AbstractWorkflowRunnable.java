@@ -3,6 +3,7 @@ package com.fairyteller.utilities.concurrent.workflow;
 public abstract class AbstractWorkflowRunnable implements UIRunnable, MainRunnable{
 	private boolean success = true;
 	private boolean proceed = true;
+	private Object[] arguments;
 	
 	public void setSuccess(boolean success){
 		this.success = success;
@@ -24,4 +25,12 @@ public abstract class AbstractWorkflowRunnable implements UIRunnable, MainRunnab
 	 */
 	@Override
 	public abstract void run();
+	
+	public Object[] getArguments() {
+		return this.arguments;
+	}
+
+	public void setArguments(Object[] arguments) {
+		this.arguments = arguments;
+	}
 }

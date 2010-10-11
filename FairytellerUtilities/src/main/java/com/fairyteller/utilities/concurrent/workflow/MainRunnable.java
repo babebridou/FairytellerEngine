@@ -16,4 +16,6 @@ public interface MainRunnable extends Runnable{
 	@Override
 	public abstract void run();
 
+	public Object[] getArguments();
+	public void setArguments(Object[] arguments);
 }
