@@ -170,7 +170,7 @@ public class SampleBranchingWorkflowMain {
 							setEnabled(true);
 						} catch (InterruptedException e) {
 							JOptionPane.showMessageDialog(myComponent,
-									"problème!");
+									"probl√®me!");
 						} catch (ExecutionException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
